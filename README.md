@@ -28,12 +28,12 @@ Every Parameter gots it's own helppage now:
 0. Set NESPi+ case switch to safe shutdown *ON*
 1. Login with SSH
 2. Type in commands `mkdir /home/pi/scripts && cd /home/pi/scripts`
-3. DL: `wget https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/multi_switch.sh && chmod +x multi_switch.sh`
+3. DL: `wget https://raw.githubusercontent.com/Kiname/ES-generic-shutdown/master/multi_switch.sh && chmod +x multi_switch.sh`
     * 3.1 If there is an older version please remove this one with `rm multi_switch.sh`
     * 3.2 Otherwise the current downloaded version will get a .sh.1 filename!
 4. Now edit ES autostart with `nano /etc/rc.local` and add script to like ....
 5. `/home/pi/scripts/multi_switch.sh --nespi+ &` but BEFORE the last line    
-6. Install fan_shutdown script: `cd /lib/systemd/system-shutdown/ && sudo wget https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/shutdown_fan && sudo chmod +x shutdown_fan`
+6. Install fan_shutdown script: `cd /lib/systemd/system-shutdown/ && sudo wget https://raw.githubusercontent.com/Kiname/ES-generic-shutdown/master/shutdown_fan && sudo chmod +x shutdown_fan`
     * 6.1 The shutdown_fan is setted to GPIO4 as standard
     * 6.2 Therefore you might edit with `sudo nano /lib/systemd/system-shutdown/shutdown_fan`
 
