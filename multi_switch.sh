@@ -142,7 +142,7 @@ function es_action() {
             if [[ -n $ES_PID ]]; then
                 #touch /tmp/es-sysrestart
                 #chown pi:pi /tmp/es-sysrestart
-                kill $ES_PID
+                sudo kill $ES_PID
                 wait_forpid $ES_PID
                 exit
             fi
@@ -154,7 +154,7 @@ function es_action() {
             if [[ -n $ES_PID ]]; then
                 #touch /tmp/es-shutdown
                 #chown pi:pi /tmp/es-shutdown
-                kill $ES_PID
+                sudo kill $ES_PID
                 wait_forpid $ES_PID
                 exit
             fi
@@ -166,7 +166,7 @@ function es_action() {
             if [[ -n $ES_PID ]]; then
                 #touch /tmp/es-restart
                 #chown pi:pi /tmp/es-restart
-                kill $ES_PID
+                sudo kill $ES_PID
                 wait_forpid $ES_PID
             fi
         ;;
@@ -175,7 +175,7 @@ function es_action() {
             # Just terminate ES binary and let other services do their job
             ES_PID=$(check_esrun)
             if [[ -n $ES_PID ]]; then
-                kill $ES_PID
+                sudo kill $ES_PID
                 wait_forpid $ES_PID
                 exit
             fi
