@@ -1,4 +1,4 @@
-# ES-generic-shutdown
+# ES-generic-shutdown MODIFIED BY KIKO FOR PICOCHESS
 A script that includes a few known standard power switches (MAUSBERRY, SHIM, POLOLU) and gots a default config for a safe shutdown.
 
 ## Quick help
