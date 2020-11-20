@@ -27,33 +27,15 @@ Every Parameter gots it's own helppage now:
 
 0. Set NESPi+ case switch to safe shutdown *ON*
 1. Login with SSH
-1.a Cambia las rutas a donde quieras instalar el script
-2. Type in commands `mkdir /home/pi/RetroPie/scripts && cd /home/pi/RetroPie/scripts`
+2. Type in commands `mkdir /home/pi/scripts && cd /home/pi/scripts`
 3. DL: `wget https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/multi_switch.sh && chmod +x multi_switch.sh`
     * 3.1 If there is an older version please remove this one with `rm multi_switch.sh`
     * 3.2 Otherwise the current downloaded version will get a .sh.1 filename!
-4. Now edit ES autostart with `nano /opt/retropie/configs/all/autostart.sh` and add script to like ....
-4a. Puedes hacerlo tambien en /etc/rc.local
-5. `/home/pi/RetroPie/scripts/multi_switch.sh --nespi+ &` but BEFORE the last line *emulationstatio #auto*   
+4. Now edit ES autostart with `nano /etc/rc.local` and add script to like ....
+5. `/home/pi/scripts/multi_switch.sh --nespi+ &` but BEFORE the last line    
 6. Install fan_shutdown script: `cd /lib/systemd/system-shutdown/ && sudo wget https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/shutdown_fan && sudo chmod +x shutdown_fan`
     * 6.1 The shutdown_fan is setted to GPIO4 as standard
     * 6.2 Therefore you might edit with `sudo nano /lib/systemd/system-shutdown/shutdown_fan`
-    
-## The [MultiSwitch - ShutdownScript](https://github.com/crcerror/ES-generic-shutdown/blob/master/multi_switch.sh)
-
-To install:
-1. Login with SSH
-2. Type in commands `mkdir /home/pi/RetroPie/scripts && cd /home/pi/RetroPie/scripts`
-3. DL: `wget https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/multi_switch.sh && chmod +x multi_switch.sh`
-    * 3.1 If there is an older version please remove this one with `rm multi_switch.sh`
-    * 3.2 Otherwise the current downloaded version will get a .sh.1 filename!
-4. Now edit ES autostart with `nano /opt/retropie/configs/all/autostart.sh` and add script to like ....
-5. `/home/pi/RetroPie/scripts/multi_switch.sh --nespicase &` but BEFORE the last line *emulationstatio #auto*   
-    * 5.1 Use suitable parameter sets `--nespicase &`, `--nespi+ &`, `--onoffshim &`, `--mausberry &`
-    * 5.2 *NESPiCase @Yahmez -Mod* and *NESPi Case +* makes use of internal PullUp Resistors, therefore `raspi-gpio` is needed
-    * 5.3 Install **raspi-gpio** with `sudo apt install raspi-gpio` (only for NESPiCase and Yahmez-Mod needed!)
-    * 5.4 the **sudo** commands depends of usecase, Mausberry and OnOffShim needs it for GPIO export, both NESPiCase(+) not
-6. Give me some feedback ;)
 
 ## Command Line Parameters
 **Systemcommand:**
