@@ -144,6 +144,7 @@ function es_action() {
                 #chown pi:pi /tmp/es-sysrestart
                 sudo kill $ES_PID
                 wait_forpid $ES_PID
+		sudo reboot
                 exit
             fi
         ;;
@@ -156,6 +157,7 @@ function es_action() {
                 #chown pi:pi /tmp/es-shutdown
                 sudo kill $ES_PID
                 wait_forpid $ES_PID
+		sudo poweroff
                 exit
             fi
         ;;
