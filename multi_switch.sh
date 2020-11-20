@@ -78,7 +78,7 @@ function check_emurun() {
 # If yes return PID from ES binary
 # due caller funtion
 function check_esrun() {
-    local ES_PID="$(pgrep -f "/opt/retropie/supplementary/.*/emulationstation([^.]|$)")"
+    local ES_PID="$(pgrep -f picochess)"
     echo $ES_PID
 }
 
@@ -140,8 +140,8 @@ function es_action() {
             # Initiate system reboot and give control back to ES
             ES_PID=$(check_esrun)
             if [[ -n $ES_PID ]]; then
-                touch /tmp/es-sysrestart
-                chown pi:pi /tmp/es-sysrestart
+                #touch /tmp/es-sysrestart
+                #chown pi:pi /tmp/es-sysrestart
                 kill $ES_PID
                 wait_forpid $ES_PID
                 exit
@@ -152,8 +152,8 @@ function es_action() {
             # Initiate system shutdown and give control back to ES
             ES_PID=$(check_esrun)
             if [[ -n $ES_PID ]]; then
-                touch /tmp/es-shutdown
-                chown pi:pi /tmp/es-shutdown
+                #touch /tmp/es-shutdown
+                #chown pi:pi /tmp/es-shutdown
                 kill $ES_PID
                 wait_forpid $ES_PID
                 exit
@@ -164,8 +164,8 @@ function es_action() {
             # Initiate restart of ES
             ES_PID=$(check_esrun)
             if [[ -n $ES_PID ]]; then
-                touch /tmp/es-restart
-                chown pi:pi /tmp/es-restart
+                #touch /tmp/es-restart
+                #chown pi:pi /tmp/es-restart
                 kill $ES_PID
                 wait_forpid $ES_PID
             fi
@@ -322,9 +322,15 @@ function NESPiPlus() {
         reset=$(raspi-gpio get $GPIO_resetswitch | grep -c "level=1 fsel=0 func=INPUT")
 
         if [[ $reset == 0 ]]; then
-            RC_PID=$(check_emurun)
-            [[ -z $RC_PID ]] && es_action --ES-RESTART
-            [[ -n $RC_PID ]] && es_action --ES-CLOSEEMU
+	# Flashes LED 4 Times on PowerOff
+    	for iteration in 1 2 3 4; do
+        	raspi-gpio set $GPIO_lediodectrl op dl
+        	sleep 0.25
+        	raspi-gpio set $GPIO_lediodectrl op dh
+        	sleep 0.25
+    	done
+            es_action --ES-REBOOT
+            sudo reboot
         fi
 
         sleep 1
