@@ -251,9 +251,15 @@ function NESPiCase() {
         reset=$(raspi-gpio get $GPIO_resetswitch | grep -c "level=1 fsel=0 func=INPUT")
 
         if [[ $reset == 0 ]]; then
-            RC_PID=$(check_emurun)
-            [[ -z $RC_PID ]] && es_action --ES-RESTART
-            [[ -n $RC_PID ]] && es_action --ES-CLOSEEMU
+	# Flashes LED 4 Times on PowerOff
+    	for iteration in 1 2 3 4; do
+        	raspi-gpio set $GPIO_lediodectrl op dl
+        	sleep 0.25
+        	raspi-gpio set $GPIO_lediodectrl op dh
+        	sleep 0.25
+    	done
+            es_action --ES-REBOOT
+            sudo reboot
         fi
 
         sleep 1
