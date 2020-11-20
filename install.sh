@@ -8,18 +8,18 @@
 apt-get install -y raspi-gpio
 
 # Create Directories and download scripts
-mkdir -p /home/pi/RetroPie/scripts
-cd /home/pi/RetroPie/scripts
-wget -N -q --show-progress https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/multi_switch.sh
+mkdir -p /home/pi/scripts
+cd /home/pi/scripts
+wget -N -q --show-progress https://raw.githubusercontent.com/Kiname/ES-generic-shutdown/master/multi_switch.sh
 
 # Set user rights
 chmod +x multi_switch.sh
 chown -R pi:pi ../scripts
 
 # Create auto startup
-sed -i -e '/\/home\/pi\/RetroPie\/scripts\/multi_switch.sh/ d' -e '1i /home/pi/RetroPie/scripts/multi_switch.sh --nespi+ &' /opt/retropie/configs/all/autostart.sh
+sed -i -e '/\/home\/pi\/scripts\/multi_switch.sh/ d' -e '1i /home/pi/scripts/multi_switch.sh --nespi+ &' /etc/rc.local
 
 # This is shutdown script, it seems to be used in some bare cases
 cd /lib/systemd/system-shutdown
-wget -N -q --show-progress https://raw.githubusercontent.com/crcerror/ES-generic-shutdown/master/shutdown_fan
+wget -N -q --show-progress https://raw.githubusercontent.com/Kiname/ES-generic-shutdown/master/shutdown_fan
 chmod +x shutdown_fan
